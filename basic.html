@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LibreSpeed</title>
+    <link rel="shortcut icon" href="favicon.ico">
+	<meta charset="UTF-8" />
+</head>
+<script type="text/javascript" src="speedtest.js"></script>
+
+
+<body>
+    <h1>Coba1</h1>
+
+    <h4>IP Address</h4>
+    <p id="ip"></p>
+
+    <h4>Download</h4>
+    <p id="download"></p>
+
+    <h4>Upload</h4>
+    <p id="upload"></p>
+
+    <h4>Latency</h4>
+    <p id="ping"></p>
+
+    <script type="text/javascript">
+	var SPEEDTEST_SERVERS=[
+	{	//this is my demo server, remove it
+		name:"Speedtest Demo Server (Helsinki)", //user friendly name for the server
+		server:"//fi.openspeed.org/", //URL to the server. // at the beginning will be replaced with http:// or https:// automatically
+		dlURL:"garbage.php",  //path to download test on this server (garbage.php or replacement)
+		ulURL:"empty.php",  //path to upload test on this server (empty.php or replacement)
+		pingURL:"empty.php",  //path to ping/jitter test on this server (empty.php or replacement)
+		getIpURL:"getIP.php"  //path to getIP on this server (getIP.php or replacement)
+	}
+];
+        var s=new Speedtest();
+        s.onupdate = function (data) { // when status is received, put the values in the appropriate fields
+            document.getElementById('download').textContent = data.dlStatus + ' Mbit/s'
+            document.getElementById('upload').textContent = data.ulStatus + ' Mbit/s'
+            document.getElementById('ping').textContent = data.pingStatus + ' ms, ' + data.jitterStatus + ' ms jitter'
+            document.getElementById('ip').textContent = data.clientIp
+        }
+		
+        s.start(); // start the speedtest with default settings
+    </script>
+<script type="text/javascript">
+
+</script>
+</body>
+</html>
